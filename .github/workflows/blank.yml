@@ -1,0 +1,35 @@
+
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: actions/checkout@v4
+    
+      - name: Cross
+        uses: actions/checkout@v3
+      
+        with:
+            registry: ghcr.io
+            username: ${{ github.actor }}
+            password: ${{ secrets.GITHUB.TOKEN }}
+      - run: docker build -t ghcr.io/razorxzxc/python-app:latest .
+      - run: docker push ghcr.io/razorxzxc/python-app:latest .
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Cross
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB.TOKEN }}
+      - run: docker pull ghcr.io/razorxzxc/python-app:latest
+      - run: docker run  ghcr.io/razorxzxc/python-app:latest
+  
