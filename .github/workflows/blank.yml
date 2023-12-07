@@ -20,5 +20,5 @@ jobs:
             registry: ghcr.io
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB.TOKEN }}
-      - run: docker build -t ghcr.io/razorxzxc/1:latest .
+      - run: docker build -t ghcr.io/razorxzxc/1:latest . /python
       - run: docker push ghcr.io/razorxzxc/1:latest .
