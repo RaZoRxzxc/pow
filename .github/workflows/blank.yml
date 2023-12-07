@@ -17,8 +17,8 @@ jobs:
             registry: ghcr.io
             username: ${{ github.actor }}
             password: ${{ secrets.GITHUB.TOKEN }}
-      - run: docker build -t ghcr.io/razorxzxc/python-app:latest .
-      - run: docker push ghcr.io/razorxzxc/python-app:latest .
+      - run: docker build -t ghcr.io/razorxzxc/1:latest .
+      - run: docker push ghcr.io/razorxzxc/1:latest .
 
   deploy:
     runs-on: ubuntu-latest
@@ -30,6 +30,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB.TOKEN }}
-      - run: docker pull ghcr.io/razorxzxc/python-app:latest
-      - run: docker run  ghcr.io/razorxzxc/python-app:latest
+      - run: docker pull ghcr.io/razorxzxc/1:latest
+      - run: docker run  ghcr.io/razorxzxc/1:latest
   
